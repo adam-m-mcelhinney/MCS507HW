@@ -1,10 +1,25 @@
-# L-12 MCS 275 Mon 24 Sep 2012 : guifit.py
+"""
+HW3, #9 and #10
+L12, #1 and #5
 
-# A GUI to play with polyfit.
+#1. Add buttons random and clear to the GUI to add points with
+mouse clicks. When pressed, the button random adds a random
+point to the list and shows it, while the clear button clears the
+canvas and clears the list of stored points.
+
+#5. Add a button and an entry widget to the guifit.py. Pressing the
+button generates as many random points as the value of the entry
+widget. Consider the fitting polynomial for increasing degrees, i.e.:
+explore what happens if the degree of the scale is set higher.
+
+
+
+"""
 
 from Tkinter import *
 import numpy as np
 from mouseptsadd import AddPoints
+import random
 
 class FitPoints(AddPoints):
    """
@@ -22,9 +37,14 @@ class FitPoints(AddPoints):
       self.degree = IntVar()
       self.fitdeg = Scale(wdw,orient='vertical',
          length=r*self.addpts.mag,label='degree',
-         from_=0,to=5,resolution=1,
+         from_=0,to=10,resolution=1,
          variable=self.degree,command=self.Fit)
       self.fitdeg.grid(row=0,column=1)
+
+      ## Add  button to clear all points
+      self.cl = Button(wdw,text="Clear All Points"\
+                      , command=self.clear_points)
+      self.cl.grid(row=3,column=1)
 
       ## Add random points to plot
       self.f = Entry(wdw)
@@ -34,8 +54,22 @@ class FitPoints(AddPoints):
       self.b.grid(row=2,column=1)
       self.rows=r
       self.cols=c
-      # Adjust the size of the random dots
-      self.size=10
+
+   def clear_points(self):
+      """
+      Clears the points by "drawing" the points again
+      """
+      ap=self.addpts
+      L= ap.points
+      print L
+      m=len(L)
+      x=[L[j][0]*ap.mag for j in range(0,m)]
+      y=[L[j][1]*ap.mag for j in range(0,m)]
+      for i in range(0,m):
+         print 'Points left: '+ str(ap.points)
+         ap.DrawCircle(x[i],y[i])
+
+         
 
    def rand_points(self):
       n=self.f.get()
@@ -45,11 +79,9 @@ class FitPoints(AddPoints):
       #print self.rows
       #col=c
       for i in range (1,n):
-         i=random.randint(1, self.rows)
-         j=random.randint(1, self.cols)
-         x0=i*self.size-self.size/2; x1=x0+self.size;
-         y0=j*self.size-self.size/2; y1=y0+self.size;
-         ap.c.create_oval(x0,y0,x1,y1,fill="red")
+         i=random.randint(1, self.rows*ap.mag)
+         j=random.randint(1, self.cols*ap.mag)
+         ap.DrawCircle(i,j)
          #print i
          #print j
 
