@@ -16,12 +16,12 @@ from scipy import linspace
 from scipy.integrate import simps
 
 a=0
-b=10
+b=1
 x=[]
 y=[]
-f_x= lambda z: z**2+100
-start=6
-max_double=5
+f_x= lambda z: z**2
+start=1
+max_double=3
 n=start
 ##for i in range(0,max_double):
     
@@ -89,11 +89,11 @@ def test():
     """
 
     from scipy.integrate import simps
-    n=50
+    n=3
     h=(b-a)/float(n)
     x_total=x_vals([],a,h,n)
     y_tot=y_vals([],x_total,f_x)
-    n=100
+    n=6
     h=(b-a)/float(n)
     x_total=x_vals(x_total,a,h,n)
     y_tot=y_vals(y_tot,x_total,f_x)
