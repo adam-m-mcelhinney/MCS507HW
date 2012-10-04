@@ -9,7 +9,7 @@ function evaluations are recycled.
 Question: For composite rule, do we have to chop the area into different intervals?
 See wikipedia
 
-Need to fix this
+WRONG!
 
 """
 from scipy import linspace
@@ -25,7 +25,7 @@ max_double=3
 n=start
 ##for i in range(0,max_double):
     
-h=(b-a)/n
+h=(b-a)/float(n)
 x_new=[a+j*h for j in range(0,n)]
 # Evaluate the function for all x's
 y_int=[f_x(x_new[i]) for i in range(0,len(x_new))]
@@ -36,7 +36,7 @@ def create_coeff(n):
     [1,4,2,4,2,4,.....,1]
     """
     coeff=[1]
-    for i in range(0,n-2):
+    for i in range(0,n-1):
         if i%2==0:
             coeff.append(4)
         else:
@@ -51,7 +51,7 @@ def x_vals(x,a,h,n):
     Creates the list of new x_values and appends it to the old list
     """
     print 'h:'+str(h)
-    for i in range(len(x),n):
+    for i in range(len(x),n+1):
         if __name__=="__main__": print 'x val:' + str(i)
         x.append(a+i*h)
 

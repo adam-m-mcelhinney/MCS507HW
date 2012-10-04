@@ -9,6 +9,8 @@ number of function evaluations doubles.
 Question: For composite rule, do we have to chop the area into different intervals?
 See wikipedia
 
+WRONG!
+
 """
 from scipy import linspace
 from scipy.integrate import simps
@@ -36,6 +38,7 @@ class SimpIterator():
         self.int=simps(self.y,self.x)
         self.n=2.0*self.n
         
+        
 
 
 
@@ -43,12 +46,13 @@ def test(i=10):
     """
     Approximates the square root of 2.
     """
-    f=lambda x: x**2 - 2.0
-    s= SimpIterator(f,0,5,1)
+    f=lambda x: x**2
+    s= SimpIterator(f,0,5,6)
     for i in range (0,i):
         s.next()
-        print s.n
         print s.int
+        print s.n
+        
     return s
    
 if __name__=="__main__": t=test()
