@@ -6,10 +6,7 @@ Make an iterator for the composite Simpson rule, using
 scipy.integrate.simps. In each step of the iterator, the total
 number of function evaluations doubles.
 
-Question: For composite rule, do we have to chop the area into different intervals?
-See wikipedia
 
-WRONG!
 
 """
 from scipy import linspace
