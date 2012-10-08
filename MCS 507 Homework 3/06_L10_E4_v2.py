@@ -19,7 +19,7 @@ from scipy.integrate import simps
 
 
 # Evaluate the function for all x's
-#y_int=[f_x(x_new[i]) for i in range(0,len(x_new))]
+
 # create the coefficient list
 def create_coeff(n):
     """
@@ -36,16 +36,15 @@ def create_coeff(n):
     return coeff
 
 
-def x_vals(x,a,h,n):
+def x_vals(a,b,n):
     """
     Creates the list of new x_values and appends it to the old list
     """
-    print 'h:'+str(h)
-    for i in range(len(x),n+1):
-        if __name__=="__main__": print 'x val:' + str(i)
-        x.append(a+i*h)
+    h=(b-a)/float(n)
+    x_val=[a+j*h for j in range(0,n+1)]
+    
 
-    return x
+    return x_val, h
 
 y_vals={}
 
@@ -59,56 +58,63 @@ def y_calc(x,f):
         except KeyError:
             key=x[i]
             y_vals[key]=f(x[i])
-            print y_vals[key]
+            #print y_vals[key]
 
 print y_vals
 
 
-def final(h,y,x,coeff):
+def final(y_vals,x,coeff,h):
     """
     Calculates the new values of Simpsons rule
     """
     s=0
-    for i in range(0,len(y)):
-        s=s+coeff[i]*y[x[i]]
+    for i in range(0,len(x)):
+        print y_vals[x[i]]
+        s=s+coeff[i]*y_vals[x[i]]
+        #print coeff[i]*y_vals[x[i]]
         
-        if __name__=="__main__": print 'coeff:' + str(coeff[i])+' y:' + str(y[x[i]])
-
-
-    s=s*(float(h)/3.0)
-
+    s=s*(h/3.0)
     return s
     
             
 
-#def test():
-a=0
-b=1
-x=[]
-y=[]
-f= lambda z: z**5
-f_x=f
-start=4
-max_double=3
-n=start
-##for i in range(0,max_double):
-h=(b-a)/float(n)
-x_new=[a+j*h for j in range(0,n+1)]
-y_calc(x_new,f_x)
-c=create_coeff(n)
-print c
-t=final(h,y_vals,x_new,c)
-print t
-
-s=0
-for i in range(0,len(y_vals)):
-    print y_vals[x_new[i]]
-    s=s+c[i]*y_vals[x_new[i]]
-    print c[i]*y_vals[x_new[i]]
-
-s=s*(h/3.0)
+###def test():
+##a=0
+##b=1
+##x=[]
+##y=[]
+##f= lambda z: z**5
+##f_x=f
+##start=4
+##max_double=3
+##n=start
+####for i in range(0,max_double):
+##h=(b-a)/float(n)
+##x_new=x_vals(a,b,n)
+##y_calc(x_new,f_x)
+##c=create_coeff(n)
+##print c
+##t=final(y_vals,x_new,c)
 
 
-#if __name__=="__main__": t=test()    
 
 
+def test():
+    a=0
+    b=1
+    f= lambda z: z**5
+    start=4
+    n=start
+    c=create_coeff(n)
+    print 'coeffs: '+ str(c)
+    x, h=x_vals(a,b,n)
+    print 'x vals: '+str(x)
+    y=y_calc(x,f)
+    print 'y vals: '+str(y)
+    t=final(y_vals,x,c,h)
+    print t
+    return c,x,y,t
+
+
+
+if __name__=="__main__": t=test()
