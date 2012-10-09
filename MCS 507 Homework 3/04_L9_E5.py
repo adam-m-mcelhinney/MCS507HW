@@ -5,6 +5,8 @@ Adjust the sympy script to compute an integration rule that
 integrates all cubics exactly.
 
 
+ASK PROF!!!
+
 """
 
 from sympy import *

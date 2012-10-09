@@ -5,7 +5,7 @@ L11, #2
 Add an exception handler to the function add_point for when the
 comma is missing or the coordinates fail to convert to floats.
 
-WRONG!
+Ask how to do this in Windows
 
 """
 

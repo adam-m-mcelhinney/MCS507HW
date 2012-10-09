@@ -4,7 +4,6 @@ L8, #2
 Write a script that prompts the user for a number n and that then
 prints all sublists of range(n).
 
-Ask prof!
 
 """
 import itertools

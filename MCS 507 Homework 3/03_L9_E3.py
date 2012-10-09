@@ -26,10 +26,16 @@ print r
 # Simpson
 x=linspace(0,1,30)
 y=f_x(x)
-print simps(y,x)
+s=simps(y,x)
+print s
 
 # Quad
 y_values,err=quad(f_x,0,1)
 print y_values
 print err
+
+real=0.29469818224912168146428093242928607188017366595729098069622884224309840761100363423064556328570738571
+print 'Romberg error: '+ str(abs(r-real))
+print 'Simpson error: '+ str(abs(s-real))
+print 'Quad error: '+ str(abs(y_values-real))
 

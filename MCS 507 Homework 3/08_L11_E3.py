@@ -1,12 +1,10 @@
 """
-HW3, #7
-L11, #2
+HW3, #8
+L11, #8
 
-Add an exception handler to the function add_point for when the
-comma is missing or the coordinates fail to convert to floats.
-
-WRONG!
-
+3 Modify the code for -v x of storepoints.py so that it returns
+the value of a quadratic fit in case the value for the given x is not
+stored.
 """
 
 #! /usr/bin/python
