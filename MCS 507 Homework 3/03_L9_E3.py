@@ -9,6 +9,9 @@ simps.
 
 Real value= 0.29469818224912168146428093242928607188017366595729098069622884224309840761100363423064556328570738571
 
+
+Call quad with full output and look at number of function evaluations
+
 """
 from scipy.integrate import quad
 from scipy import exp, sin
@@ -22,17 +25,21 @@ help(quad)
 f_x=lambda x: exp(-x**2.0)*sin(x)
 r = romberg(f_x,0,1,show=True)
 print r
+# 33 function evaluations
 
 # Simpson
 x=linspace(0,1,30)
 y=f_x(x)
 s=simps(y,x)
 print s
+#30 function evaluations
 
 # Quad
-y_values,err=quad(f_x,0,1)
+y_values,err, d=quad(f_x,0,1, full_output=1)
 print y_values
 print err
+print d
+# 21 function evaluations
 
 real=0.29469818224912168146428093242928607188017366595729098069622884224309840761100363423064556328570738571
 print 'Romberg error: '+ str(abs(r-real))

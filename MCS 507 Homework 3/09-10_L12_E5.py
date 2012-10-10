@@ -33,11 +33,16 @@ class FitPoints(AddPoints):
       """
       self.addpts = AddPoints(wdw,r,c,output)
       wdw.title("visualizing polyfit")
+
+      # max degree of fitted poly
+      self.max_d=10
+      
       # define the scale next to the canvas
+      
       self.degree = IntVar()
       self.fitdeg = Scale(wdw,orient='vertical',
          length=r*self.addpts.mag,label='degree',
-         from_=0,to=10,resolution=1,
+         from_=0,to=self.max_d,resolution=1,
          variable=self.degree,command=self.Fit)
       self.fitdeg.grid(row=0,column=1)
 
@@ -58,6 +63,7 @@ class FitPoints(AddPoints):
    def clear_points(self):
       """
       Clears the points by "drawing" the points again
+      Also clears the fitted points
       """
       ap=self.addpts
       L= ap.points
@@ -68,6 +74,10 @@ class FitPoints(AddPoints):
       for i in range(0,m):
          print 'Points left: '+ str(ap.points)
          ap.DrawCircle(x[i],y[i])
+      # Clear fit
+      for i in range(0,self.max_d+1):
+         self.DeleteFit(i)
+      
 
          
 
